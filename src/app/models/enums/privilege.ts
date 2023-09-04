@@ -1,0 +1,15 @@
+export enum Privilege {
+  ManageUsers = 'MANAGE_USERS',
+  ManagePaidLinguisticAssets = 'MANAGE_PAID_LINGUISTIC_ASSETS',
+  ManageVendors = 'MANAGE_VENDORS',
+  ManageClientsAndProjectTags = 'MANAGE_CLIENTS_AND_PROJECT_TAGS',
+  CreateAnyProjects = 'CREATE_ANY_PROJECTS',
+  ViewAllProjects = 'VIEW_ALL_PROJECTS',
+  ManageLinguisticAssetsInAllProjects = 'MANAGE_LINGUISTIC_ASSETS_IN_ALL_PROJECTS',
+  ManageAllGlossaries = 'MANAGE_ALL_GLOSSARIES',
+  ManageAllTms = 'MANAGE_ALL_TMS',
+  SuggestTermsWithoutSpecifyingAGlossary = 'SUGGEST_TERMS_WITHOUT_SPECIFYING_A_GLOSSARY',
+  ManageProjectTemplates = 'MANAGE_PROJECT_TEMPLATES',
+  ManageOrders = 'MANAGE_ORDERS',
+  ManageServiceTemplates = 'MANAGE_SERVICE_TEMPLATES',
+}

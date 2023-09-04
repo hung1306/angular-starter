@@ -1,0 +1,84 @@
+<div class="flex justify-between">
+  <h1 class="text-3xl font-bold mb-6">Users</h1>
+
+  <a mat-raised-button color="primary" [routerLink]="[NavigationRoutes.Create]">Create</a>
+</div>
+
+<div class="flex justify-between" *ngIf="filterFormGroup" [formGroup]="filterFormGroup">
+  <div class="columns-2 gap-4">
+    <mat-form-field class="!block">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status">
+        <mat-option [value]="FilterUtils.AllValue">
+          All
+        </mat-option>
+
+        <mat-option *ngFor="let status of Statuses" [value]="status">
+          {{ status | status }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button class="!block" (click)="onResetFilter()">Reset</button>
+  </div>
+
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput formControlName="searchQuery" (keyup.enter)="onChangeFilter()">
+    <button *ngIf="!!searchQueryFormControl.value" mat-icon-button matSuffix (click)="onResetSearchQuery()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+
+<div class="mat-elevation-z1">
+  <table mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef> Email</th>
+      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef> Phone number</th>
+      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Status</th>
+      <td mat-cell *matCellDef="let element"> {{element.status | status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDate">
+      <th mat-header-cell *matHeaderCellDef> Created date</th>
+      <td mat-cell *matCellDef="let element"> {{element.createdDate | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="updatedDate">
+      <th mat-header-cell *matHeaderCellDef> Updated date</th>
+      <td mat-cell *matCellDef="let element"> {{element.updatedDate | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <div class="text-center">
+          <a mat-button [routerLink]="[element.id]">View</a>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="AppConfig.PageSizeOptions" [pageIndex]="paginationMetadata!.pageNumber"
+                 [pageSize]="paginationMetadata!.pageSize" [length]="paginationMetadata!.totalCount"
+                 showFirstLastButtons aria-label="Select page of users" (page)="onChangePagination($event)">
+  </mat-paginator>
+</div>

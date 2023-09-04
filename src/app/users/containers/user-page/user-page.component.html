@@ -1,0 +1,41 @@
+<h1 class="text-3xl font-bold mb-6">User details</h1>
+
+<ng-container *ngIf="entity">
+  <div class="max-w-fit" *ngIf="!isEditing">
+    <div class="columns-2">
+      <div class="font-medium">Username</div>
+      <div>{{ entity.username }}</div>
+    </div>
+
+    <div class="columns-2">
+      <div class="font-medium">Name</div>
+      <div>{{ entity.firstname }} {{ entity.lastname }}</div>
+    </div>
+
+    <div class="columns-2">
+      <div class="font-medium">Phone number</div>
+      <div>{{ entity.phoneNumber }}</div>
+    </div>
+
+    <div class="columns-2">
+      <div class="font-medium">Status</div>
+      <div>{{ entity.status | status }}</div>
+    </div>
+
+    <mat-divider class="!my-4"></mat-divider>
+
+    <div class="flex justify-end gap-4">
+      <button mat-raised-button color="warn" (click)="onDelete()">
+        Delete
+        <mat-icon *ngIf="deleteState === ApiState.Requesting" iconPositionEnd>
+          <mat-spinner diameter="16" color="primary"></mat-spinner>
+        </mat-icon>
+      </button>
+
+      <button mat-raised-button color="primary" (click)="onEdit()">Edit</button>
+    </div>
+  </div>
+
+  <app-user-form *ngIf="isEditing" [user]="entity" [state]="updateState" (cancel)="onCancelEdit()"
+                 (save)="onUpdate($event)"></app-user-form>
+</ng-container>

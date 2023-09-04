@@ -1,0 +1,19 @@
+<h1 class="text-3xl font-bold mb-6">Account settings</h1>
+
+<div class="max-w-fit" *ngIf="account">
+  <div class="columns-2">
+    <div class="font-medium">Username</div>
+    <div>{{ account.username }}</div>
+  </div>
+
+  <div class="columns-2">
+    <div class="font-medium">Name</div>
+    <div>{{ account.firstname }} {{ account.lastname }}</div>
+  </div>
+
+  <div class="columns-2">
+    <div class="font-medium">Phone number</div>
+    <div>{{ account.phoneNumber }}</div>
+  </div>
+</div>
+

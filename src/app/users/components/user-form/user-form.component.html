@@ -1,0 +1,61 @@
+<form class="w-fit" [formGroup]="formGroup" (ngSubmit)="onSave()">
+  <div class="columns gap-4 min-w-[40rem]" [class.columns-2]="!user">
+    <mat-form-field class="!block">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="e.g. email@example.com" formControlName="username" [readonly]="!!user">
+      <mat-error *ngIf="usernameFormControl.hasError('required')">* Required</mat-error>
+      <mat-error *ngIf="usernameFormControl.hasError('email')">Invalid email</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="!block" *ngIf="!user">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="passwordInputType" formControlName="password">
+      <button mat-icon-button matSuffix (click)="onTogglePasswordVisibility()" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="isPasswordHidden">
+        <mat-icon>{{isPasswordHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordFormControl.hasError('required')">* Required</mat-error>
+      <mat-error *ngIf="passwordFormControl.hasError('pattern')">Invalid password</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="columns-2 gap-4 min-w-[40rem]">
+    <mat-form-field class="!block">
+      <mat-label>Firstname</mat-label>
+      <input matInput placeholder="e.g. John" formControlName="firstname">
+      <mat-error *ngIf="firstnameFormControl.hasError('required')">* Required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="!block">
+      <mat-label>Lastname</mat-label>
+      <input matInput placeholder="e.g. Smith" formControlName="lastname">
+      <mat-error *ngIf="lastnameFormControl.hasError('required')">* Required</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="columns-2 gap-4 min-w-[30rem]">
+    <mat-form-field class="!block">
+      <mat-label>Phone number</mat-label>
+      <input matInput placeholder="e.g. 033333333" formControlName="phoneNumber">
+      <mat-error *ngIf="phoneNumberFormControl.hasError('required')">* Required</mat-error>
+      <mat-error *ngIf="phoneNumberFormControl.hasError('pattern')">Invalid phone number</mat-error>
+    </mat-form-field>
+
+    <mat-checkbox class="!block" formControlName="status">Active</mat-checkbox>
+  </div>
+
+  <mat-divider class="!my-4"></mat-divider>
+
+  <div class="flex justify-end">
+    <button mat-raised-button class="mr-4" *ngIf="!!user" (click)="onCancel()">
+      Cancel
+    </button>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">
+      {{ !!user ? 'Save' : 'Create' }}
+      <mat-icon *ngIf="state === ApiState.Requesting" iconPositionEnd>
+        <mat-spinner diameter="16" color="accent"></mat-spinner>
+      </mat-icon>
+    </button>
+  </div>
+</form>

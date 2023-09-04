@@ -1,0 +1,65 @@
+const colors = require('tailwindcss/colors')
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",
+  ],
+  theme: {
+    colors: {
+      primary: {
+        50: '#e8eaf6',
+        100: '#c5cae9',
+        200: '#9fa8da',
+        300: '#7986cb',
+        400: '#5c6bc0',
+        500: '#3f51b5',
+        600: '#3949ab',
+        700: '#303f9f',
+        800: '#283593',
+        900: '#1a237e',
+        light: '#c5cae9',
+        DEFAULT: '#3f51b5',
+        dark: '#303f9f',
+      },
+      accent: {
+        50: '#fce4ec',
+        100: '#f8bbd0',
+        200: '#f48fb1',
+        300: '#f06292',
+        400: '#ec407a',
+        500: '#e91e63',
+        600: '#d81b60',
+        700: '#c2185b',
+        800: '#ad1457',
+        900: '#880e4f',
+        light: '#ff80ab',
+        DEFAULT: '#ff4081',
+        dark: '#f50057',
+      },
+      warn: {
+        50: '#ffebee',
+        100: '#ffcdd2',
+        200: '#ef9a9a',
+        300: '#e57373',
+        400: '#ef5350',
+        500: '#f44336',
+        600: '#e53935',
+        700: '#d32f2f',
+        800: '#c62828',
+        900: '#b71c1c',
+        light: '#ffcdd2',
+        DEFAULT: '#f44336',
+        dark: '#d32f2f',
+      },
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.gray,
+    },
+    extend: {},
+  },
+  plugins: [],
+}
+

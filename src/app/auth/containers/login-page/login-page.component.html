@@ -1,0 +1,40 @@
+<div class="h-full flex justify-center items-center">
+  <form class="mat-elevation-z1 p-6" [formGroup]="formGroup" (ngSubmit)="onLogin()">
+    <svg-icon src="assets/svgs/logo.svg"></svg-icon>
+
+    <h1 class="text-3xl font-bold mb-6">Login</h1>
+
+    <div class="min-w-[20rem]">
+      <mat-form-field class="w-full">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="e.g. email@example.com" formControlName="username">
+        <mat-error *ngIf="usernameFormControl.hasError('required')">* Required</mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('email')">Invalid email</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="min-w-[20rem]">
+      <mat-form-field class="w-full">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="passwordInputType" formControlName="password">
+        <button mat-icon-button matSuffix (click)="onTogglePasswordVisibility()" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="isPasswordHidden">
+          <mat-icon>{{isPasswordHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">* Required</mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('pattern')">Invalid password</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="flex justify-between items-center">
+      <a class="text-primary" [routerLink]="['', NavigationRoutes.Auth, NavigationRoutes.ForgotPassword]">Forgot your
+        password?</a>
+      <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">
+        Login
+        <mat-icon *ngIf="loginState === ApiState.Requesting" iconPositionEnd>
+          <mat-spinner diameter="16" color="accent"></mat-spinner>
+        </mat-icon>
+      </button>
+    </div>
+  </form>
+</div>
