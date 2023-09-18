@@ -11,9 +11,9 @@ export interface BaseEntity {
 
 export interface BaseDto {
   id: string;
-  createdDate: Dayjs;
+  createdDate: string;
   createdBy: string;
-  updatedDate: Dayjs;
+  updatedDate: string;
   updatedBy: string;
 }
 
