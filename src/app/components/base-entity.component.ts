@@ -42,7 +42,7 @@ export abstract class BaseEntityComponent<
 
     this.selectData();
   }
-
+  // method use in UserComponent
   selectData() {
     this.store.selectedEntity$.pipe(
       takeUntilDestroyed(),

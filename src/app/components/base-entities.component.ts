@@ -67,7 +67,7 @@ export abstract class BaseEntitiesComponent<
   ngOnInit(): void {
     this.store.list();
   }
-
+  // test comment
   selectData() {
     this.store.entities$.pipe(
       takeUntilDestroyed(),
