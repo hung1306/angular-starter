@@ -11,11 +11,14 @@ import { MatLineModule } from '@angular/material/core';
 
 import { AngularSvgIconModule } from 'angular-svg-icon';
 
+import { HasRoleDirective } from '@app/directives';
+
 import { layoutContainers } from './containers';
 
 @NgModule({
   declarations: [
     layoutContainers,
+    HasRoleDirective,
   ],
   imports: [
     CommonModule,

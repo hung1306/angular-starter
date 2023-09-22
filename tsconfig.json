@@ -62,6 +62,12 @@
       ],
       "@app/components": [
         "src/app/components"
+      ],
+      "@app/directives": [
+        "src/app/directives"
+      ],
+      "@app/guards": [
+        "src/app/guards"
       ]
     }
   },
