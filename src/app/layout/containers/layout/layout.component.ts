@@ -8,10 +8,12 @@ import { filter, take, tap } from 'rxjs';
 import { accountActions, AppState, authActions, authSelectors, routerSelectors } from '@app/store';
 import { NavigationRoutes } from '@app/const';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Role } from '@app/models';
 
 interface NavigationOption {
   label: string;
   routerLink: string[];
+  role?: Role | Role[];
 }
 
 @Component({
@@ -33,7 +35,8 @@ export class LayoutComponent implements OnInit {
     {
       label: 'Users',
       routerLink: [NavigationRoutes.Users],
-    }
+      role: Role.Administrator,
+    },
   ];
   segments: string[] = [];
 

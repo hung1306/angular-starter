@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { IsLoggedInGuard, IsNotLoggedInGuard } from '@app/auth';
 import { LayoutComponent } from '@app/layout';
 import { NavigationRoutes } from '@app/const';
+import { Role } from '@app/models';
+import { HasRoleGuard, IsLoggedInGuard, IsNotLoggedInGuard } from '@app/guards';
 
 const routes: Routes = [
   {
@@ -23,6 +24,8 @@ const routes: Routes = [
       {
         path: NavigationRoutes.Users,
         loadChildren: () => import('./users/users.module').then(m => m.UsersModule),
+        canActivate: [HasRoleGuard],
+        data: { role: Role.Administrator },
       },
       {
         path: NavigationRoutes.Empty,
