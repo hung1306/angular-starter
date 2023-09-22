@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { NavigationRoutes } from '@app/const';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiState } from '@app/models';
-import { AppState, authActions, authSelectors } from '@app/store';
-import { select, Store } from '@ngrx/store';
-import { resetActions } from '../../../store/actions/reset-password.action';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { tap } from 'rxjs';
+import { AppState, authActions } from '@app/store';
+
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-forgot-password-page',
@@ -42,6 +40,6 @@ export class ForgotPasswordPageComponent {
     }
     const username = this.usernameFormControl.value;
     console.log(username);
-    this._store.dispatch(resetActions.sendResetEmail({ email: username }));
+    this._store.dispatch(authActions.sendResetEmail({ email: username }));
   }
 }

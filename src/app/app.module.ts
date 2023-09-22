@@ -13,16 +13,19 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { environment } from '@app/env';
 import { AuthInterceptor } from '@app/auth';
-import { AccountEffect, AuthEffect, CustomSerializer, metaReducers, reducers, UsersEffect } from '@app/store';
+import {
+  AccountEffect,
+  AuthEffect,
+  CustomSerializer,
+  metaReducers,
+  reducers,
+  UsersEffect,
+} from '@app/store';
 import { LayoutModule } from '@app/layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { ResetPasswordEffects } from './store/effects/reset-password.effects';
-// import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
-
-// import { ContainersComponent } from './src/app/auth/containers/containers.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,7 @@ import { ResetPasswordEffects } from './store/effects/reset-password.effects';
         strictActionTypeUniqueness: true,
       },
     }),
-    EffectsModule.forRoot([AuthEffect, AccountEffect, UsersEffect, ResetPasswordEffects]),
+    EffectsModule.forRoot([AuthEffect, AccountEffect, UsersEffect]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
     }),

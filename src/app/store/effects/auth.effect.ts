@@ -10,7 +10,7 @@ import { of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { AppConfig, LocalStorageKeys, NavigationRoutes } from '@app/const';
-import { AuthService } from '@app/services';
+import { AuthService, ResetPasswordService } from '@app/services';
 import { HttpUtils } from '@app/utils';
 
 import { authActions } from '../actions';
@@ -61,6 +61,39 @@ export class AuthEffect {
       })
     )
     , { dispatch: false });
+  sendResetEmail$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(authActions.sendResetEmail),
+      switchMap((action) =>
+        this._resetPasswordService.sendResetPasswordEmail(action.email).pipe(
+          map((response) => {
+            return authActions.sendResetEmailSuccess();
+          }),
+          catchError((error) => {
+            return of(authActions.sendResetEmailFailure({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  confirmResetPassword$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(authActions.confirmResetPassword),
+      switchMap((action) =>
+        this._resetPasswordService.confirmResetPassword(action.userName, action.newPassword, action.code).pipe(
+          map((response) => {
+
+            return authActions.confirmResetPasswordSuccess();
+          }),
+          catchError((error) => {
+
+            return of(authActions.confirmResetPasswordFailure({ error }));
+          })
+        )
+      )
+    )
+  );
 
   constructor(
     private readonly _router: Router,
@@ -68,6 +101,7 @@ export class AuthEffect {
     private readonly _store: Store<AppState>,
     private readonly _authService: AuthService,
     private readonly _snackBar: MatSnackBar,
+    private readonly _resetPasswordService: ResetPasswordService
   ) {
     const token = localStorage.getItem(LocalStorageKeys.Token);
 

@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
 import { NavigationRoutes, RegexPatterns } from '@app/const';
 import { ApiState } from '@app/models';
-import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { AppState, resetActions } from '@app/store';
+import { AppState, authActions } from '@app/store';
+
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
+
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-reset-password',
@@ -32,8 +34,8 @@ export class ResetPasswordComponent {
   constructor(
     private readonly _store: Store<AppState>,
     private readonly _formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router
+    private readonly _route: ActivatedRoute,
+    private readonly _router: Router
   ) {
     this.formGroup = this._formBuilder.group(
       {
@@ -46,7 +48,7 @@ export class ResetPasswordComponent {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this._route.queryParams.subscribe(params => {
       this.username = params['username'];
       this.code = params['code'];
     });
@@ -66,8 +68,8 @@ export class ResetPasswordComponent {
       return;
     }
     const confirmPassWord = this.confirmPasswordFormControl.value;
-    this._store.dispatch(resetActions.confirmResetPassword({ userName: this.username, newPassword: confirmPassWord, code: this.code }));
-    this.router.navigate(['auth/login']);
+    this._store.dispatch(authActions.confirmResetPassword({ userName: this.username, newPassword: confirmPassWord, code: this.code }));
+    this._router.navigate(['auth/login']);
   }
 }
 
