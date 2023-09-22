@@ -9,7 +9,7 @@ export class NavigationRoutes {
   public static readonly Auth: string = 'auth';
   public static readonly Login: string = 'login';
   public static readonly ForgotPassword: string = 'forgot-password';
-
+  public static readonly ResetPassword: string = 'reset-password';
   // account
   public static readonly Account: string = 'account';
 

@@ -13,17 +13,21 @@ import { RouterStateModel } from './custom-route-serializer';
 import { authReducer, AuthState } from './auth.reducer';
 import { accountReducer, AccountState } from './account.reducer';
 import { usersReducer, UsersState } from './users.reducer';
+import { resetPasswordReducer, ResetState } from './reset-password.reducer';
 
 export interface AppState {
   router: RouterReducerState<RouterStateModel>;
   auth: AuthState,
+  reset: ResetState
   account: AccountState,
   users: UsersState,
+
 }
 
 export const reducers: ActionReducerMap<AppState> = {
   router: routerReducer,
   auth: authReducer,
+  reset: resetPasswordReducer,
   account: accountReducer,
   users: usersReducer,
 };
@@ -41,3 +45,4 @@ export * from './account.reducer';
 export * from './auth.reducer';
 export * from './users.reducer';
 export * from './base-entities.reducer';
+export * from './reset-password.reducer';

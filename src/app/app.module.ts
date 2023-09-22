@@ -19,9 +19,16 @@ import { LayoutModule } from '@app/layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { ResetPasswordEffects } from './store/effects/reset-password.effects';
+// import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
+
+// import { ContainersComponent } from './src/app/auth/containers/containers.component';
+
 @NgModule({
   declarations: [
     AppComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -40,13 +47,15 @@ import { AppComponent } from './app.component';
         strictActionTypeUniqueness: true,
       },
     }),
-    EffectsModule.forRoot([AuthEffect, AccountEffect, UsersEffect]),
+    EffectsModule.forRoot([AuthEffect, AccountEffect, UsersEffect, ResetPasswordEffects]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AngularSvgIconModule.forRoot(),
     MatSnackBarModule,
+
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

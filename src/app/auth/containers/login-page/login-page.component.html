@@ -27,8 +27,9 @@
     </div>
 
     <div class="flex justify-between items-center">
-      <a class="text-primary" [routerLink]="['', NavigationRoutes.Auth, NavigationRoutes.ForgotPassword]">Forgot your
-        password?</a>
+      <a class="text-primary" [routerLink]="['', NavigationRoutes.Auth, NavigationRoutes.ForgotPassword]">
+        Forgot your password?
+      </a>
       <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.invalid">
         Login
         <mat-icon *ngIf="loginState === ApiState.Requesting" iconPositionEnd>

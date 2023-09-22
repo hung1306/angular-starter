@@ -11,10 +11,12 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { authContainers } from './containers';
 import { AuthRoutingModule } from './auth-routing.module';
+import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
     authContainers,
+    ResetPasswordComponent,
   ],
   imports: [
     CommonModule,

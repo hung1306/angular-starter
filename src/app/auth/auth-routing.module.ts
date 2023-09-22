@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NavigationRoutes } from '@app/const';
 
 import { ForgotPasswordPageComponent, LoginPageComponent } from './containers';
+import { ResetPasswordComponent } from './containers/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -15,9 +16,15 @@ const routes: Routes = [
     component: ForgotPasswordPageComponent,
   },
   {
+    path: NavigationRoutes.ResetPassword,
+    component: ResetPasswordComponent,
+    data: { username: '', code: '' }
+  },
+  {
     path: NavigationRoutes.Other,
     redirectTo: NavigationRoutes.Login,
   },
+
 ];
 
 @NgModule({
