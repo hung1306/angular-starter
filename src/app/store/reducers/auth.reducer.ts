@@ -10,10 +10,14 @@ export interface AuthState {
   token?: string;
   info?: AuthInfo;
   loginState: ApiState;
+  forgotPasswordState: ApiState;
+  resetPasswordState: ApiState;
 }
 
 const initialState: AuthState = {
   loginState: ApiState.Idle,
+  forgotPasswordState: ApiState.Idle,
+  resetPasswordState: ApiState.Idle,
 };
 
 export const authReducer = createReducer(
@@ -43,4 +47,32 @@ export const authReducer = createReducer(
       info: fromAuthInfoDto(decoded),
     };
   }),
+
+  on(authActions.forgotPassword, (state) => ({
+    ...state,
+    forgotPasswordState: ApiState.Requesting,
+  })),
+  on(authActions.forgotPasswordSucceeded, (state) => ({
+    ...state,
+    forgotPasswordState: ApiState.Succeeded,
+  })),
+  on(authActions.forgotPasswordFailed, (state) => ({
+    ...state,
+    forgotPasswordState: ApiState.Failed,
+  })),
+
+  on(authActions.resetPassword, (state) => ({
+    ...state,
+    resetPasswordState: ApiState.Requesting,
+  })),
+  on(authActions.resetPasswordSucceeded, (state) => ({
+    ...state,
+    resetPasswordState: ApiState.Succeeded,
+  })),
+  on(authActions.resetPasswordFailed, (state) => ({
+    ...state,
+    resetPasswordState: ApiState.Failed,
+  })),
 );
+
+

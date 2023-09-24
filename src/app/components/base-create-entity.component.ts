@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { tap } from 'rxjs';
 
 import { BaseEntitiesComponentState, BaseEntitiesState, BaseEntitiesStore } from '@app/store';
 import { ApiState, BaseDto, BaseEntity, BaseListFilter, ListQueryParams } from '@app/models';
-import { ActivatedRoute, Router } from '@angular/router';
+import { NavigationRoutes } from '@app/const';
 
 @Component({
   selector: 'app-base-create-entity',
@@ -47,7 +48,7 @@ export abstract class BaseCreateEntityComponent<
       takeUntilDestroyed(),
       tap(createState => {
         if (this.createState === ApiState.Requesting && createState === ApiState.Succeeded) {
-          this.router.navigate(['../', this.entities?.at(0)?.id], { relativeTo: this.activatedRoute });
+          this.router.navigate([NavigationRoutes.Parent, this.entities?.at(0)?.id], { relativeTo: this.activatedRoute });
         }
 
         this.createState = createState;

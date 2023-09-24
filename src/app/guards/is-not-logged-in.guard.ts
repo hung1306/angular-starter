@@ -7,6 +7,7 @@ import { Observable, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AppState, authSelectors } from '@app/store';
+import { NavigationRoutes } from '@app/const';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class IsNotLoggedInGuard {
       map(isLoggedIn => !isLoggedIn),
       tap(canActivate => {
         if (!canActivate) {
-          this._router.navigate([]);
+          this._router.navigate([NavigationRoutes.Empty]);
         }
       })
     );

@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { LoginRequest } from '@app/models';
+import { LoginRequest, ResetPassword } from '@app/models';
 
 const login = createAction(
   '[Auth] Login',
@@ -21,8 +21,33 @@ const logout = createAction(
 );
 
 const setToken = createAction(
-  '[Auth] Set token',
+  '[Auth] Set Token',
   props<{ token: string }>()
+);
+const forgotPassword = createAction(
+  '[Auth] Forgot Password',
+  props<{ username: string }>()
+);
+
+const forgotPasswordSucceeded = createAction(
+  '[Auth] Forgot Password Success'
+);
+
+const forgotPasswordFailed = createAction(
+  '[Auth] Forgot Password Failure',
+);
+
+const resetPassword = createAction(
+  '[Auth] Reset Password',
+  props<{ model: ResetPassword }>()
+);
+
+const resetPasswordSucceeded = createAction(
+  '[Auth] Reset Password Success'
+);
+
+const resetPasswordFailed = createAction(
+  '[Auth] Reset Password Failure',
 );
 
 export const authActions = {
@@ -31,4 +56,10 @@ export const authActions = {
   loginFailed,
   logout,
   setToken,
+  forgotPassword,
+  forgotPasswordSucceeded,
+  forgotPasswordFailed,
+  resetPassword,
+  resetPasswordSucceeded,
+  resetPasswordFailed,
 };

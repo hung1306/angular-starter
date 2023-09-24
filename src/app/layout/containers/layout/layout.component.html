@@ -39,10 +39,10 @@
       </button>
 
       <mat-menu #menu="matMenu">
-        <button [routerLink]="[NavigationRoutes.Account]" mat-menu-item>
+        <a [routerLink]="[NavigationRoutes.Account]" mat-menu-item>
           <mat-icon>manage_accounts</mat-icon>
           <span>Settings</span>
-        </button>
+        </a>
         <button (click)="onLogout()" mat-menu-item>
           <mat-icon>logout</mat-icon>
           <span>Logout</span>

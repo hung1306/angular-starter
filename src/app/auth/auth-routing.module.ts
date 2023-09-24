@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NavigationRoutes } from '@app/const';
 
-import { ForgotPasswordPageComponent, LoginPageComponent } from './containers';
+import { ForgotPasswordPageComponent, LoginPageComponent, ResetPasswordComponent } from './containers';
 
 const routes: Routes = [
   {
@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: NavigationRoutes.ForgotPassword,
     component: ForgotPasswordPageComponent,
+  },
+  {
+    path: NavigationRoutes.ResetPassword,
+    component: ResetPasswordComponent,
   },
   {
     path: NavigationRoutes.Other,

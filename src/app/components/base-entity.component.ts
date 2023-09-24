@@ -6,6 +6,7 @@ import { tap } from 'rxjs';
 
 import { BaseEntitiesComponentState, BaseEntitiesState, BaseEntitiesStore } from '@app/store';
 import { ApiState, BaseDto, BaseEntity, BaseListFilter, ListQueryParams } from '@app/models';
+import { NavigationRoutes } from '@app/const';
 
 @Component({
   selector: 'app-base-create-entity',
@@ -42,6 +43,7 @@ export abstract class BaseEntityComponent<
 
     this.selectData();
   }
+
   // method use in UserComponent
   selectData() {
     this.store.selectedEntity$.pipe(
@@ -66,7 +68,7 @@ export abstract class BaseEntityComponent<
       takeUntilDestroyed(),
       tap(deleteState => {
         if (this.deleteState === ApiState.Requesting && deleteState === ApiState.Succeeded) {
-          this.router.navigate(['../'], { relativeTo: this.activatedRoute });
+          this.router.navigate([NavigationRoutes.Parent], { relativeTo: this.activatedRoute });
         }
 
         this.deleteState = deleteState;

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '@app/env';
-import { LoginRequest, LoginResponse } from '@app/models';
+import { LoginRequest, LoginResponse, ResetPassword } from '@app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,13 @@ export class AuthService {
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this._http.post<LoginResponse>(`${this.baseUrl}/login`, request);
+  }
+
+  forgotPassword(username: string): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/forgot-password`, { username });
+  }
+
+  resetPassword(model: ResetPassword): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/reset-password`, model);
   }
 }

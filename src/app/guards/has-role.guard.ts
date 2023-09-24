@@ -8,7 +8,8 @@ import { map } from 'rxjs/operators';
 
 import { AppState, authSelectors } from '@app/store';
 import { AuthInfo, Role } from '@app/models';
-import { ArrayUtils } from '../utils/array.utils';
+import { NavigationRoutes } from '@app/const';
+import { ArrayUtils } from '@app/utils';
 
 
 @Injectable({
@@ -37,7 +38,7 @@ export class HasRoleGuard {
         return true;
       }
 
-      this._router.navigate(['']);
+      this._router.navigate([NavigationRoutes.Empty]);
       return false;
     }));
 

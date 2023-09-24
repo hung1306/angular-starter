@@ -13,7 +13,14 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { environment } from '@app/env';
 import { AuthInterceptor } from '@app/auth';
-import { AccountEffect, AuthEffect, CustomSerializer, metaReducers, reducers, UsersEffect } from '@app/store';
+import {
+  AccountEffect,
+  AuthEffect,
+  CustomSerializer,
+  metaReducers,
+  reducers,
+  UsersEffect,
+} from '@app/store';
 import { LayoutModule } from '@app/layout';
 
 import { AppRoutingModule } from './app-routing.module';
