@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractC
 
 import { Store } from '@ngrx/store';
 
+import { ValidationUtils } from '@app/utils';
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -43,7 +45,7 @@ export class ResetPasswordComponent {
         confirmPassword: this._formBuilder.control<string | undefined>(undefined, [Validators.required, Validators.pattern(RegexPatterns.Password)]),
 
       },
-      { validators: passwordsMatchValidator }
+      { validators: ValidationUtils.passwordsMatchValidator }
     );
   }
 
@@ -68,16 +70,8 @@ export class ResetPasswordComponent {
       return;
     }
     const confirmPassWord = this.confirmPasswordFormControl.value;
-    this._store.dispatch(authActions.confirmResetPassword({ userName: this.username, newPassword: confirmPassWord, code: this.code }));
-    this._router.navigate(['auth/login']);
+    this._store.dispatch(authActions.confirmResetPassword({ reset: { username: this.username, password: confirmPassWord, code: this.code } }));
+
   }
 }
 
-const passwordsMatchValidator: ValidatorFn = (formGroup: AbstractControl) => {
-  const passwordFormControl = formGroup.get('password') as FormControl;
-  const confirmPasswordFormControl = formGroup.get('confirmPassword') as FormControl;
-
-  return passwordFormControl.value === confirmPasswordFormControl.value
-    ? null
-    : { passwordsNotMatch: true };
-};

@@ -11,15 +11,15 @@ export interface AuthState {
   info?: AuthInfo;
   loginState: ApiState;
 
-  isSendingEmail: ApiState;
-  isResettingPassword: ApiState;
+  forgotPasswordState: ApiState;
+  resetPasswordState: ApiState;
   errorMessage: string | null;
 }
 
 const initialState: AuthState = {
   loginState: ApiState.Idle,
-  isSendingEmail: ApiState.Idle,
-  isResettingPassword: ApiState.Idle,
+  forgotPasswordState: ApiState.Idle,
+  resetPasswordState: ApiState.Idle,
   errorMessage: null,
 };
 
@@ -52,31 +52,29 @@ export const authReducer = createReducer(
   }),
   on(authActions.sendResetEmail, (state) => ({
     ...state,
-    isSendingEmail: ApiState.Requesting,
+    forgotPasswordState: ApiState.Requesting,
     errorMessage: null,
   })),
-  on(authActions.sendResetEmailSuccess, (state) => ({
+  on(authActions.sendResetEmailSucceeded, (state) => ({
     ...state,
-    isSendingEmail: ApiState.Succeeded,
+    forgotPasswordState: ApiState.Succeeded,
   })),
-  on(authActions.sendResetEmailFailure, (state, { error }) => ({
+  on(authActions.sendResetEmailFailed, (state) => ({
     ...state,
-    isSendingEmail: ApiState.Failed,
-    errorMessage: error,
+    forgotPasswordState: ApiState.Failed,
   })),
   on(authActions.confirmResetPassword, (state) => ({
     ...state,
-    isResettingPassword: ApiState.Requesting,
+    resetPasswordState: ApiState.Requesting,
     errorMessage: null,
   })),
-  on(authActions.confirmResetPasswordSuccess, (state) => ({
+  on(authActions.confirmResetPasswordSucceeded, (state) => ({
     ...state,
-    isResettingPassword: ApiState.Succeeded,
+    resetPasswordState: ApiState.Succeeded,
   })),
-  on(authActions.confirmResetPasswordFailure, (state, { error }) => ({
+  on(authActions.confirmResetPasswordFailed, (state) => ({
     ...state,
-    isResettingPassword: ApiState.Failed,
-    errorMessage: error,
+    resetPasswordState: ApiState.Failed,
   })),
 );
 

@@ -10,7 +10,7 @@ import { of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { AppConfig, LocalStorageKeys, NavigationRoutes } from '@app/const';
-import { AuthService, ResetPasswordService } from '@app/services';
+import { AuthService } from '@app/services';
 import { HttpUtils } from '@app/utils';
 
 import { authActions } from '../actions';
@@ -27,7 +27,6 @@ export class AuthEffect {
           map(response => authActions.loginSucceeded({ token: response.token })),
           catchError((error: HttpErrorResponse) => {
             this._snackBar.open(HttpUtils.getErrorMessage(error), undefined, { duration: AppConfig.SnackBarDuration });
-
             return of(authActions.loginFailed());
           })
         ))
@@ -65,12 +64,13 @@ export class AuthEffect {
     this._actions$.pipe(
       ofType(authActions.sendResetEmail),
       switchMap((action) =>
-        this._resetPasswordService.sendResetPasswordEmail(action.email).pipe(
+        this._authService.sendResetPasswordEmail(action.email).pipe(
           map((response) => {
-            return authActions.sendResetEmailSuccess();
+            return authActions.sendResetEmailSucceeded();
           }),
-          catchError((error) => {
-            return of(authActions.sendResetEmailFailure({ error }));
+          catchError((error: HttpErrorResponse) => {
+            this._snackBar.open(HttpUtils.getErrorMessage(error), undefined, { duration: AppConfig.SnackBarDuration });
+            return of(authActions.sendResetEmailFailed());
           })
         )
       )
@@ -81,14 +81,14 @@ export class AuthEffect {
     this._actions$.pipe(
       ofType(authActions.confirmResetPassword),
       switchMap((action) =>
-        this._resetPasswordService.confirmResetPassword(action.userName, action.newPassword, action.code).pipe(
+        this._authService.confirmResetPassword(action.reset).pipe(
           map((response) => {
-
-            return authActions.confirmResetPasswordSuccess();
+            this._router.navigate([NavigationRoutes.Login]);
+            return authActions.confirmResetPasswordSucceeded();
           }),
-          catchError((error) => {
-
-            return of(authActions.confirmResetPasswordFailure({ error }));
+          catchError((error: HttpErrorResponse) => {
+            this._snackBar.open(HttpUtils.getErrorMessage(error), undefined, { duration: AppConfig.SnackBarDuration });
+            return of(authActions.confirmResetPasswordFailed());
           })
         )
       )
@@ -101,7 +101,6 @@ export class AuthEffect {
     private readonly _store: Store<AppState>,
     private readonly _authService: AuthService,
     private readonly _snackBar: MatSnackBar,
-    private readonly _resetPasswordService: ResetPasswordService
   ) {
     const token = localStorage.getItem(LocalStorageKeys.Token);
 

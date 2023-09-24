@@ -33,13 +33,11 @@ export class ForgotPasswordPageComponent {
     );
   }
 
-
   onForgotPassword(): void {
     if (this.formGroup.invalid) {
       return;
     }
     const username = this.usernameFormControl.value;
-    console.log(username);
     this._store.dispatch(authActions.sendResetEmail({ email: username }));
   }
 }
