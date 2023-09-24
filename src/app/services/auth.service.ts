@@ -20,13 +20,11 @@ export class AuthService {
     return this._http.post<LoginResponse>(`${this.baseUrl}/login`, request);
   }
 
-  sendResetPasswordEmail(username: string): Observable<any> {
-    return this._http.post(`${this.baseUrl}/forgot-password`, { username: username });
+  sendResetPasswordEmail(username: string): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/forgot-password`, { username: username });
   }
 
-  confirmResetPassword(reset: ResetPassword): Observable<any> {
-    return this._http.post(`${this.baseUrl}/reset-password`, reset);
-
+  confirmResetPassword(reset: ResetPassword): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/reset-password`, reset);
   }
-
 }

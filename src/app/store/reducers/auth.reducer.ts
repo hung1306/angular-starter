@@ -10,17 +10,14 @@ export interface AuthState {
   token?: string;
   info?: AuthInfo;
   loginState: ApiState;
-
   forgotPasswordState: ApiState;
   resetPasswordState: ApiState;
-  errorMessage: string | null;
 }
 
 const initialState: AuthState = {
   loginState: ApiState.Idle,
   forgotPasswordState: ApiState.Idle,
   resetPasswordState: ApiState.Idle,
-  errorMessage: null,
 };
 
 export const authReducer = createReducer(
@@ -53,7 +50,6 @@ export const authReducer = createReducer(
   on(authActions.sendResetEmail, (state) => ({
     ...state,
     forgotPasswordState: ApiState.Requesting,
-    errorMessage: null,
   })),
   on(authActions.sendResetEmailSucceeded, (state) => ({
     ...state,
@@ -66,7 +62,6 @@ export const authReducer = createReducer(
   on(authActions.confirmResetPassword, (state) => ({
     ...state,
     resetPasswordState: ApiState.Requesting,
-    errorMessage: null,
   })),
   on(authActions.confirmResetPasswordSucceeded, (state) => ({
     ...state,

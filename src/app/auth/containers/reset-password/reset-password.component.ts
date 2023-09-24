@@ -4,8 +4,7 @@ import { AppState, authActions } from '@app/store';
 
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
@@ -37,7 +36,6 @@ export class ResetPasswordComponent {
     private readonly _store: Store<AppState>,
     private readonly _formBuilder: FormBuilder,
     private readonly _route: ActivatedRoute,
-    private readonly _router: Router
   ) {
     this.formGroup = this._formBuilder.group(
       {
@@ -65,13 +63,16 @@ export class ResetPasswordComponent {
   }
 
   onResetPassword() {
-    console.log(this.formGroup.errors);
     if (this.formGroup.invalid) {
       return;
     }
-    const confirmPassWord = this.confirmPasswordFormControl.value;
-    this._store.dispatch(authActions.confirmResetPassword({ reset: { username: this.username, password: confirmPassWord, code: this.code } }));
-
+    const confirmPassword = this.confirmPasswordFormControl.value;
+    this._store.dispatch(authActions.confirmResetPassword({
+      resetPassword: {
+        username: this.username,
+        password: confirmPassword,
+        code: this.code
+      }
+    }));
   }
 }
-

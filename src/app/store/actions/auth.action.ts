@@ -39,7 +39,7 @@ const sendResetEmailFailed = createAction(
 
 const confirmResetPassword = createAction(
   '[Auth] Confirm Reset Password',
-  props<{ reset: ResetPassword }>()
+  props<{ resetPassword: ResetPassword }>()
 );
 
 const confirmResetPasswordSucceeded = createAction(
@@ -49,7 +49,6 @@ const confirmResetPasswordSucceeded = createAction(
 const confirmResetPasswordFailed = createAction(
   '[Auth] Confirm Reset Password Failure',
 );
-
 
 export const authActions = {
   login,

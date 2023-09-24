@@ -81,7 +81,7 @@ export class AuthEffect {
     this._actions$.pipe(
       ofType(authActions.confirmResetPassword),
       switchMap((action) =>
-        this._authService.confirmResetPassword(action.reset).pipe(
+        this._authService.confirmResetPassword(action.resetPassword).pipe(
           map((response) => {
             this._router.navigate([NavigationRoutes.Login]);
             return authActions.confirmResetPasswordSucceeded();
