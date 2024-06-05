@@ -32,10 +32,22 @@ const selectLoginState = createSelector(
   (state: AuthState) => state.loginState
 );
 
+const selectForgotPasswordState = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.forgotPasswordState
+);
+
+const selectResetPasswordState = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.resetPasswordState
+);
+
 export const authSelectors = {
   selectAuthState,
   selectToken,
   selectInfo,
   selectIsLoggedIn,
   selectLoginState,
+  selectForgotPasswordState,
+  selectResetPasswordState,
 };

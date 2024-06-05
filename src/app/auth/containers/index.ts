@@ -5,11 +5,19 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 export {
   LoginPageComponent,
   ForgotPasswordPageComponent,
+<<<<<<< HEAD
   ResetPasswordComponent
+=======
+  ResetPasswordComponent,
+>>>>>>> 684206b7507b0264ec2ecfec12b116b68292bdd8
 };
 
 export const authContainers = [
   LoginPageComponent,
   ForgotPasswordPageComponent,
+<<<<<<< HEAD
   ResetPasswordComponent
+=======
+  ResetPasswordComponent,
+>>>>>>> 684206b7507b0264ec2ecfec12b116b68292bdd8
 ];

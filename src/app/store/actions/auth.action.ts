@@ -21,9 +21,10 @@ const logout = createAction(
 );
 
 const setToken = createAction(
-  '[Auth] Set token',
+  '[Auth] Set Token',
   props<{ token: string }>()
 );
+<<<<<<< HEAD
 const sendResetEmail = createAction(
   '[Auth] Send Reset Email',
   props<{ email: string }>()
@@ -48,6 +49,32 @@ const confirmResetPasswordSucceeded = createAction(
 
 const confirmResetPasswordFailed = createAction(
   '[Auth] Confirm Reset Password Failure',
+=======
+const forgotPassword = createAction(
+  '[Auth] Forgot Password',
+  props<{ username: string }>()
+);
+
+const forgotPasswordSucceeded = createAction(
+  '[Auth] Forgot Password Success'
+);
+
+const forgotPasswordFailed = createAction(
+  '[Auth] Forgot Password Failure',
+);
+
+const resetPassword = createAction(
+  '[Auth] Reset Password',
+  props<{ model: ResetPassword }>()
+);
+
+const resetPasswordSucceeded = createAction(
+  '[Auth] Reset Password Success'
+);
+
+const resetPasswordFailed = createAction(
+  '[Auth] Reset Password Failure',
+>>>>>>> 684206b7507b0264ec2ecfec12b116b68292bdd8
 );
 
 export const authActions = {
@@ -56,10 +83,19 @@ export const authActions = {
   loginFailed,
   logout,
   setToken,
+<<<<<<< HEAD
   sendResetEmail,
   sendResetEmailSucceeded,
   sendResetEmailFailed,
   confirmResetPassword,
   confirmResetPasswordFailed,
   confirmResetPasswordSucceeded
+=======
+  forgotPassword,
+  forgotPasswordSucceeded,
+  forgotPasswordFailed,
+  resetPassword,
+  resetPasswordSucceeded,
+  resetPasswordFailed,
+>>>>>>> 684206b7507b0264ec2ecfec12b116b68292bdd8
 };

@@ -20,11 +20,20 @@ export class AuthService {
     return this._http.post<LoginResponse>(`${this.baseUrl}/login`, request);
   }
 
+<<<<<<< HEAD
   sendResetPasswordEmail(username: string): Observable<void> {
     return this._http.post<void>(`${this.baseUrl}/forgot-password`, { username: username });
   }
 
   confirmResetPassword(reset: ResetPassword): Observable<void> {
     return this._http.post<void>(`${this.baseUrl}/reset-password`, reset);
+=======
+  forgotPassword(username: string): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/forgot-password`, { username });
+  }
+
+  resetPassword(model: ResetPassword): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/reset-password`, model);
+>>>>>>> 684206b7507b0264ec2ecfec12b116b68292bdd8
   }
 }
